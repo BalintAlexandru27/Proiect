@@ -15,8 +15,8 @@
                 <input type="text" class="form-control" name="description" id="description" placeholder="Enter description">
             </div>
             <div class="form-group">
-                <label for="tag">photo_tag</label>
-                <input type="text" class="form-control" name="photo_tag" id="photo_tag" placeholder="Enter tag">
+                <label for="tag">Tags</label>
+                <input type="text" class="form-control" name="tags" id="tags" placeholder="Enter tags">
             </div>
             <div class="form-group">
                 <label for="photo">Photo</label>

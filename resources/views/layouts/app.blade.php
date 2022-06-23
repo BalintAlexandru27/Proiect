@@ -31,16 +31,18 @@
                         <ul class="nav navbar-nav">
                             &nbsp;
                         </ul>
+                        <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href= "{{ route('home') }}" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Albums</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('/albums/create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('album-create') }}">Create Album</a>
+                        </li>
+
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href= "{{ route('home') }}" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Albums</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('/albums/create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('album-create') }}">Create Album</a>
-                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -60,14 +62,14 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="ture" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}&nbsp;{{ Auth::user()->last_name }} <span class="caret"></span>
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a></li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="display: none">
                                     @csrf

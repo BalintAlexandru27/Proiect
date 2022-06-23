@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Http\Request;
 use App\Models\Album;
+use App\Models\Photo;
 
 class AlbumsController extends Controller
 {
@@ -45,13 +46,16 @@ class AlbumsController extends Controller
 
     }
 
-    public function search(Request $request){
+    public function search(Request $request, $id){
 
-        $search = $request->get('search');
+        $album = Album::find($id);
 
-        $album = Photo::where('description', 'LIKE' , '%'.$search.'%')->get();
+        $query = $request->input('query');
 
-        return view('albums.search', compact('album'));
+        $searched_items = Photo::where('tags', 'like' , "%$query%")->get();
+
+        return view('albums.search', compact('searched_items', 'album'));
+
     }
 
     public function show($id) {
