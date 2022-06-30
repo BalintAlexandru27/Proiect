@@ -1,15 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Auth;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Http\Request;
 use App\Models\Album;
 use App\Models\Photo;
+use App\Models\User;
 
 class AlbumsController extends Controller
 {
-    public function index(){
-        $albums = Album::get();
+    public function index(Request $request){
+        $user = $request->user();
+        if (is_null($user))
+        $albums = collect();
+        else 
+        $albums = Album::where('user_id', $request->user()->id)->get();
+
+
+        //$albums = Album::get();
 
         return view('albums.index')->with('albums', $albums);
     }
@@ -33,10 +42,11 @@ class AlbumsController extends Controller
 
         $filenameToStore = $filename . '_' . time() . '.' . $extension;
 
-        $request->file('cover-image')->storeAs('public/album_covers', $filenameToStore);
+        $request->file('cover-image')->storeAs('public/album_covers'. $request->input('user-id'), $filenameToStore);
 
 
         $album = new Album();
+        $album->user_id = $request->user()->id;
         $album->name = $request->input('name');
         $album->description = $request->input('description');
         $album->cover_image = $filenameToStore;
@@ -49,7 +59,8 @@ class AlbumsController extends Controller
     public function search(Request $request, $id){
 
         $album = Album::find($id);
-
+        //$album = Album::where('user_id', $request->input('user-id'))->first();
+        //error_log($album);
         $query = $request->input('query');
 
         $searched_items = Photo::where('tags', 'like' , "%$query%")->get();

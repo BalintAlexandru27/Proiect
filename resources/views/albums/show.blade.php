@@ -24,13 +24,13 @@
             @foreach ($album->photos as $photo)
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="/storage/albums/{{ $album->id }}/{{ $photo->photo }}" alt="{{ $photo->photo}}" height="200px">
+                        <img src="/storage/albums/{{ $album->id }}/{{ $photo->photo }}" alt="{{ $photo->photo}}" height="200px" onclick="window.location='{{ route("photo-show", $photo->id) }}'" />
                         <div class="card-body">
                             <p class="card-text">{{ $photo->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
+                                <!-- <div class="btn-group">
                                     <a href="{{ route('photo-show', $photo->id) }}" class="btn btn-sm btn-outline-secondary">View</a>
-                                </div>
+                                </div> -->
                                 <div class="btn-group">
                                     <a href="{{ route('photo-edit', $photo->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 </div>

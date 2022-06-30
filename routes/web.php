@@ -13,8 +13,11 @@ use App\Http\Controllers\CustomAuthController;
 |
 */
 Auth::routes();
+Route::get('/', function () {
+    return view('home');
+})->middleware('auth');
 Route::get('/home', 'App\Http\Controllers\HomeController@index');
-Route::get('/', 'App\Http\Controllers\AlbumsController@index');
+Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/albums', 'App\Http\Controllers\AlbumsController@index');
 Route::get('/albums/create', 'App\Http\Controllers\AlbumsController@create')->name('album-create');
 Route::post('/albums/store', 'App\Http\Controllers\AlbumsController@store')->name('album-store');

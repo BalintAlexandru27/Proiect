@@ -31,12 +31,11 @@
                         <ul class="nav navbar-nav">
                             &nbsp;
                         </ul>
-                        <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href= "{{ route('home') }}" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Albums</a>
+                            <a class="nav-link {{ Request::is('/albums') ? 'active' : '' }}" href="/albums">Albums</a>
                         </li>
                         <li class="nav-item {{ Request::is('/albums/create') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('album-create') }}">Create Album</a>
@@ -46,7 +45,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
@@ -66,7 +65,7 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                <li><a class="nav-link" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
